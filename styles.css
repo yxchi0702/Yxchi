@@ -129,6 +129,7 @@ body {
     font-size: 1.3rem;
     font-style: italic;
     margin-bottom: 1.2rem;
+    text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     position: relative;
@@ -137,7 +138,7 @@ body {
 
 .motto::before,
 .motto::after {
-    content: '';
+    content: '"';
     color: #ff6b6b;
     opacity: 0.7;
     font-size: 1.5rem;
@@ -156,6 +157,9 @@ body {
 .typing-text {
     font-size: 2rem;
     margin-bottom: 0.75rem;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: flex;
     align-items: center;
     gap: 0.8rem;
@@ -170,16 +174,6 @@ body {
     padding: 3px;
     -webkit-text-fill-color: initial;
 }
-
-
-
-.typing-text:hover {
-    color: #000;
-    transform: translateY(-3px) scale(1.02); /
-}
-
-
-
 
 .tags-container {
     display: flex;
@@ -399,6 +393,7 @@ body {
         flex-direction: column;
         text-align: center;
         padding: 15px;
+        gap: 1rem;
     }
 
     .avatar {
@@ -408,6 +403,27 @@ body {
 
     .typing-text {
         font-size: 1.5rem;
+        justify-content: center;
+    }
+
+    .typing-text .cat-profile-gif {
+        height: 2em;
+        margin-left: 0.3rem;
+    }
+
+    .motto {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .tags-container {
+        justify-content: center;
+        gap: 0.4rem;
+    }
+
+    .tag {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.4rem;
     }
 
     .social-section {
@@ -415,7 +431,13 @@ body {
     }
 
     .social-icons {
-        gap: 20px;
+        gap: 15px;
+    }
+
+    .social-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
     }
 
     .gallery-grid {
@@ -424,7 +446,124 @@ body {
     }
 
     .gallery-item img {
-        height: 150px;
+        height: 200px;
+    }
+
+    .music-cards {
+        gap: 12px;
+        padding: 0 10px 12px 10px;
+    }
+
+    .music-card {
+        min-width: 140px;
+        max-width: 180px;
+        padding: 12px 8px 10px 8px;
+    }
+
+    .music-gif {
+        width: 70px;
+        height: 70px;
+    }
+
+    .music-title {
+        font-size: 1em;
+    }
+
+    .music-artist {
+        font-size: 0.9em;
+    }
+
+    .music-play {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2em;
+    }
+
+    .custom-audio-player {
+        padding: 0 10px 12px 10px;
+    }
+
+    .custom-audio-player .audio-cover {
+        width: 50px;
+        height: 50px;
+        margin-right: 12px;
+    }
+
+    .custom-audio-player .audio-title {
+        font-size: 1.1em;
+    }
+
+    .custom-audio-player .audio-controls button {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-section {
+        padding: 12px;
+    }
+
+    .typing-text {
+        font-size: 1.3rem;
+    }
+
+    .typing-text .cat-profile-gif {
+        height: 1.8em;
+    }
+
+    .motto {
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    .tags-container {
+        gap: 0.3rem;
+    }
+
+    .tag {
+        font-size: 0.6rem;
+        padding: 0.08rem 0.3rem;
+    }
+
+    .music-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .music-card {
+        width: 90vw;
+        min-width: 0;
+        max-width: 98vw;
+    }
+
+    .social-icons-row {
+        gap: 24px;
+    }
+
+    .social-icons-row .social-icon {
+        font-size: 2rem;
+        width: 44px;
+        height: 44px;
+    }
+
+    .custom-audio-player {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .custom-audio-player .audio-cover {
+        margin-right: 0;
+        margin-bottom: 8px;
+    }
+
+    .custom-audio-player .audio-info {
+        width: 100%;
+        text-align: center;
+    }
+
+    .custom-audio-player .audio-controls {
+        justify-content: center;
     }
 }
 
@@ -800,19 +939,107 @@ body {
     background: #fff2;
     padding: 2px;
 }
-.cat-gif {
-  width: 38px;
-  height: 38px;
-  vertical-align: middle;
-  margin-left: 6px;
+
+.music-cards {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 32px;
+    margin: 0 auto 0 auto;
+    padding: 0 0 18px 0;
+    flex-wrap: wrap;
 }
-.cat-gif-inline {
-  width: 16px;
-  height: 16px;
-  vertical-align: middle;
-  margin-left: 6px;
-  border-radius: 3px;
+.music-card {
+    background: rgba(30,30,30,0.65);
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 18px 14px 18px;
+    min-width: 180px;
+    max-width: 220px;
+    transition: box-shadow 0.2s, transform 0.2s;
 }
+.music-card:hover {
+    box-shadow: 0 8px 32px rgba(78,205,196,0.18);
+    transform: translateY(-4px) scale(1.03);
+}
+.music-gif {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: #fff2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.music-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.music-title {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2px;
+    text-align: center;
+}
+.music-artist {
+    font-size: 0.98em;
+    color: #ffd600;
+    margin-bottom: 8px;
+    text-align: center;
+}
+.music-play {
+    background: linear-gradient(135deg, #ff6b6b 40%, #4ecdc4 100%);
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    color: #fff;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 6px;
+}
+.music-play:hover {
+    background: linear-gradient(135deg, #4ecdc4 40%, #ff6b6b 100%);
+    transform: scale(1.12);
+}
+@media (max-width: 900px) {
+    .music-cards {
+        gap: 18px;
+    }
+    .music-card {
+        min-width: 140px;
+        max-width: 180px;
+        padding: 12px 8px 10px 8px;
+    }
+    .music-gif {
+        width: 70px;
+        height: 70px;
+    }
+}
+@media (max-width: 600px) {
+    .music-cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .music-card {
+        width: 90vw;
+        min-width: 0;
+        max-width: 98vw;
+    }
+}
+
 .greeting-overlay {
     position: fixed;
     top: 0;
@@ -856,5 +1083,6 @@ body {
     transition: background 0.2s, transform 0.2s;
 }
 .enter-btn:hover {
+    background: linear-gradient(135deg, #4ecdc4 40%, #ff6b6b 100%);
     transform: scale(1.08);
 }
