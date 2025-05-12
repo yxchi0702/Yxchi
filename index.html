@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyhz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Greeting Overlay -->
+    <div id="greeting-overlay" class="greeting-overlay">
+        <div class="greeting-content">
+            <h1>Lyhz chào cậu!</h1>
+            <button id="enter-btn" class="enter-btn">Bấm vào để tiếp tục</button>
+        </div>
+    </div>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Background Video -->
+    <div class="video-background">
+        <video autoplay muted loop id="myVideo">
+            <source src="assets/videos/zero-two-bg.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Profile Section -->
+        <section class="profile-section glass" data-aos="fade-up">
+            <div class="avatar-container">
+                <img src="assets/images/avatar.gif" alt="Profile Avatar" class="avatar">
+                <div class="status-indicator online"></div>
+            </div>
+            <div class="profile-info">
+                <h1 class="typing-text">
+                    Hi, I'm Lyhz
+                    <img src="assets/images/white-cat.gif" alt="Cute Cat" class="cat-gif" />
+                </h1>
+                <p class="motto">Em la mat troi cua anh</p>
+                <div class="join-date">BirthDay: April 14th, 2010</div>
+                <div class="tags-container">
+                    <span class="tag web-dev"><i class="fas fa-code"></i> Web Developer</span>
+                    <span class="tag uiux"><i class="fas fa-paint-brush"></i> UI/UX Designer</span>
+                    <span class="tag gamer"><i class="fas fa-gamepad"></i> Gamer</span>
+                    <span class="tag music"><i class="fas fa-music"></i> Music Lover</span>
+                    <span class="tag anime"><i class="fas fa-film"></i> Anime Fan</span>
+                    <span class="tag photo"><i class="fas fa-camera"></i> Photographer</span>
+                    <span class="tag artist"><i class="fas fa-pencil-alt"></i> Artist</span>
+                    <span class="tag reader"><i class="fas fa-book"></i> Reader</span>
+                    <span class="tag coffee"><i class="fas fa-coffee"></i> Coffee Lover</span>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Gallery -->
+        <section class="media-gallery glass" data-aos="fade-up" data-aos-delay="400">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/images/gif1.gif" alt="Anime GIF 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/gif2.gif" alt="Anime GIF 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/images/gif3.gif" alt="Anime GIF 3">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Social Network Icons -->
+    <div class="social-icons-row">
+        <a href="#" class="social-icon instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon facebook" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="social-icon github" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-icon discord" title="Discord"><i class="fab fa-discord"></i></a>
+    </div>
+    <div class="music-divider"></div>
+    <!-- Custom Audio Player -->
+    <div class="custom-audio-player">
+        <img id="audio-cover" src="assets/images/song1.gif" alt="hopthuthoaiso1" class="audio-cover">
+        <div class="audio-info">
+            <span class="audio-title" id="audio-title">Hộp thư thoại số 1 <span class="jp">- Chu3isme</span></span>
+            <audio id="audio" src="assets/music/song1.mp3"></audio>
+            <div class="audio-progress">
+                <span id="audio-current">0:00</span>
+                <input type="range" id="audio-seek" value="0" min="0" max="100" step="1">
+                <span id="audio-duration">0:00</span>
+            </div>
+            <div class="audio-controls">
+                <button id="audio-prev"><i class="fas fa-backward"></i></button>
+                <button id="audio-play"><i class="fas fa-pause"></i></button>
+                <button id="audio-next"><i class="fas fa-forward"></i></button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
