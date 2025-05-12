@@ -17,7 +17,7 @@ document.addEventListener('mousemove', (e) => {
     }, 80);
 });
 
-document.addEventListener('mousedown', () => {
+document.addEventListener('moyusedown', () => {
     cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
     cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.8)';
 });
@@ -28,7 +28,7 @@ document.addEventListener('mouseup', () => {
 });
 
 // Typing animation
-const text = "Lyhz (Yxchi.sya)";
+const text = "Lyzh (yxchi.sya)";
 const typingText = document.querySelector('.typing-text');
 let i = 0;
 
@@ -82,7 +82,11 @@ const playlist = [
         cover: 'assets/images/song4.gif'
     }
 ];
+
 let currentSong = 0;
+let userPaused = false;
+let musicStarted = false;
+
 const customAudio = document.getElementById('audio');
 const audioPlayBtn = document.getElementById('audio-play');
 const audioPrevBtn = document.getElementById('audio-prev');
@@ -93,120 +97,110 @@ const audioDuration = document.getElementById('audio-duration');
 const audioTitle = document.getElementById('audio-title');
 const audioCover = document.getElementById('audio-cover');
 
-function formatTime(sec) {
-    if (isNaN(sec)) return '0:00';
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60);
-    return m + ':' + (s < 10 ? '0' : '') + s;
+// Initialize audio with user interaction
+function initializeAudio() {
+    if (!musicStarted) {
+        // Pick a random song
+        currentSong = Math.floor(Math.random() * playlist.length);
+        loadSong(currentSong);
+
+        // Try to play
+        const playPromise = customAudio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                musicStarted = true;
+                userPaused = false;
+                updatePlayButton();
+            }).catch(() => {
+                // Autoplay was prevented
+                userPaused = true;
+                updatePlayButton();
+            });
+        }
+    }
 }
+
+// Add click event listeners to all interactive elements
+document.addEventListener('click', initializeAudio);
+document.addEventListener('touchstart', initializeAudio);
 
 function loadSong(index) {
     const song = playlist[index];
     customAudio.src = song.file;
     audioTitle.innerHTML = `${song.title} <span class="jp">- ${song.artist}</span>`;
     audioCover.src = song.cover;
-    audioPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
+    updatePlayButton();
     audioSeek.value = 0;
     audioCurrent.textContent = '0:00';
     audioDuration.textContent = '0:00';
     customAudio.load();
 }
 
-function playSong() {
-    customAudio.play();
-    audioPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
-}
-
-function pauseSong() {
-    customAudio.pause();
-    audioPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
-}
-
-// Pick a random song on page load
-currentSong = Math.floor(Math.random() * playlist.length);
-loadSong(currentSong);
-
-// Always show correct play/pause icon
 function updatePlayButton() {
-    if (customAudio.paused) {
+    if (customAudio.paused || userPaused) {
         audioPlayBtn.innerHTML = '<i class="fas fa-play"></i>';
     } else {
         audioPlayBtn.innerHTML = '<i class="fas fa-pause"></i>';
     }
 }
 
-// Attempt to autoplay
-window.addEventListener('DOMContentLoaded', () => {
-    customAudio.muted = true;
-    customAudio.play().then(() => {
-        // Phát nhạc thành công
-        customAudio.muted = false;
-        updatePlayButton();
-    }).catch(() => {
-        // Nếu bị chặn, phát nhạc khi người dùng tương tác đầu tiên
-        const tryPlay = () => {
-            customAudio.play().then(() => {
-                customAudio.muted = false;
-                updatePlayButton();
-            });
-            window.removeEventListener('click', tryPlay);
-            window.removeEventListener('keydown', tryPlay);
-            window.removeEventListener('touchstart', tryPlay);
-        };
-        window.addEventListener('click', tryPlay);
-        window.addEventListener('keydown', tryPlay);
-        window.addEventListener('touchstart', tryPlay);
-    });
-});
-
-
-// Always update play button on play/pause/ended
-customAudio.addEventListener('play', updatePlayButton);
-customAudio.addEventListener('pause', updatePlayButton);
-customAudio.addEventListener('ended', updatePlayButton);
-
 // Play/pause button logic
 audioPlayBtn.onclick = function() {
     if (customAudio.paused) {
-        customAudio.play();
+        userPaused = false;
+        customAudio.play().then(() => {
+            updatePlayButton();
+        }).catch(() => {
+            userPaused = true;
+            updatePlayButton();
+        });
     } else {
+        userPaused = true;
         customAudio.pause();
+        updatePlayButton();
     }
-    // updatePlayButton(); // Not needed, handled by event listeners above
 };
 
 // Next/prev logic
 audioPrevBtn.onclick = function() {
     currentSong = (currentSong - 1 + playlist.length) % playlist.length;
     loadSong(currentSong);
-    customAudio.play();
+    userPaused = false;
+    customAudio.play().then(() => {
+        updatePlayButton();
+    }).catch(() => {
+        userPaused = true;
+        updatePlayButton();
+    });
 };
+
 audioNextBtn.onclick = function() {
     currentSong = (currentSong + 1) % playlist.length;
     loadSong(currentSong);
-    customAudio.play();
+    userPaused = false;
+    customAudio.play().then(() => {
+        updatePlayButton();
+    }).catch(() => {
+        userPaused = true;
+        updatePlayButton();
+    });
 };
 
-// Also update on song load
-customAudio.addEventListener('loadeddata', updatePlayButton);
-
-customAudio.addEventListener('loadedmetadata', () => {
-    audioDuration.textContent = formatTime(customAudio.duration);
+// Update play button on play/pause/ended
+customAudio.addEventListener('play', updatePlayButton);
+customAudio.addEventListener('pause', updatePlayButton);
+customAudio.addEventListener('ended', () => {
+    currentSong = (currentSong + 1) % playlist.length;
+    loadSong(currentSong);
+    userPaused = false;
+    customAudio.play().then(() => {
+        updatePlayButton();
+    }).catch(() => {
+        userPaused = true;
+        updatePlayButton();
+    });
 });
-
-customAudio.ontimeupdate = function() {
-    if (customAudio.duration) {
-        audioSeek.value = (customAudio.currentTime / customAudio.duration) * 100;
-        audioCurrent.textContent = formatTime(customAudio.currentTime);
-        audioDuration.textContent = formatTime(customAudio.duration);
-    }
-};
-
-audioSeek.oninput = function() {
-    if (customAudio.duration) {
-        customAudio.currentTime = (audioSeek.value / 100) * customAudio.duration;
-    }
-};
 
 // Floating White Cat smooth random running
 (function() {
@@ -260,6 +254,8 @@ audioSeek.oninput = function() {
         startCat();
     });
 })();
+
+// Greeting overlay logic
 const greetingOverlay = document.getElementById('greeting-overlay');
 const enterBtn = document.getElementById('enter-btn');
 if (greetingOverlay && enterBtn) {
@@ -273,3 +269,133 @@ if (greetingOverlay && enterBtn) {
         customAudio.play();
     });
 }
+
+// Handle personal intro items
+document.addEventListener('DOMContentLoaded', function() {
+    const introItems = document.querySelectorAll('.intro-item');
+    const modalOverlays = document.querySelectorAll('.modal-overlay');
+    const modalContents = document.querySelectorAll('.intro-content');
+    const closeButtons = document.querySelectorAll('.modal-close');
+
+    function closeAllModals() {
+        modalOverlays.forEach(overlay => overlay.classList.remove('active'));
+        modalContents.forEach(content => content.classList.remove('active'));
+    }
+
+    introItems.forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const overlay = this.querySelector('.modal-overlay');
+            const content = this.querySelector('.intro-content');
+
+            closeAllModals();
+
+            overlay.classList.add('active');
+            content.classList.add('active');
+        });
+    });
+
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllModals();
+        });
+    });
+
+    modalOverlays.forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeAllModals();
+        });
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeAllModals();
+        }
+    });
+});
+
+// Update audio time and duration
+function updateTime() {
+    const currentTime = customAudio.currentTime;
+    const duration = customAudio.duration;
+
+    // Update seek bar
+    if (!isNaN(duration)) {
+        audioSeek.value = (currentTime / duration) * 100;
+    }
+
+    // Update time displays
+    audioCurrent.textContent = formatTime(currentTime);
+    audioDuration.textContent = formatTime(duration);
+}
+
+// Format time in MM:SS
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const minutes = Math.floor(seconds / 60);
+    seconds = Math.floor(seconds % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Handle seek bar changes
+audioSeek.addEventListener('input', function() {
+    const seekTime = (audioSeek.value / 100) * customAudio.duration;
+    customAudio.currentTime = seekTime;
+});
+
+// Update time displays
+customAudio.addEventListener('timeupdate', updateTime);
+customAudio.addEventListener('loadedmetadata', updateTime);
+
+// Handle gallery items
+document.addEventListener('DOMContentLoaded', function() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const modals = document.querySelectorAll('.modal-container');
+    let currentModalIndex = 0;
+
+    // Open modal
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            currentModalIndex = index;
+            const modal = document.getElementById(`modal-${index + 1}`);
+            modal.classList.add('active');
+        });
+    });
+
+    // Close when clicking outside modal
+    modals.forEach(modal => {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+    });
+
+    // Close when pressing ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            modals.forEach(modal => {
+                modal.classList.remove('active');
+            });
+        }
+    });
+
+    // Navigation function
+    window.navigateModal = function(direction) {
+        const totalModals = modals.length;
+        currentModalIndex = (currentModalIndex + direction + totalModals) % totalModals;
+
+        // Hide all modals
+        modals.forEach(modal => modal.classList.remove('active'));
+
+        // Show current modal
+        const currentModal = document.getElementById(`modal-${currentModalIndex + 1}`);
+        currentModal.classList.add('active');
+    };
+});

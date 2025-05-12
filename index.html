@@ -41,46 +41,89 @@
                     <img src="assets/images/white-cat.gif" alt="Cute Cat" class="cat-gif" />
                 </h1>
                 <p class="motto">Em la mat troi cua anh</p>
-                <div class="join-date">BirthDay: April 14th, 2010</div>
+
                 <div class="tags-container">
-                    <span class="tag web-dev"><i class="fas fa-code"></i> Web Developer</span>
-                    <span class="tag uiux"><i class="fas fa-paint-brush"></i> UI/UX Designer</span>
+                    <span class="tag uiux"><i class="fas fa-paint-brush"></i> Bae so cute</span>
                     <span class="tag gamer"><i class="fas fa-gamepad"></i> Gamer</span>
                     <span class="tag music"><i class="fas fa-music"></i> Music Lover</span>
                     <span class="tag anime"><i class="fas fa-film"></i> Anime Fan</span>
                     <span class="tag photo"><i class="fas fa-camera"></i> Photographer</span>
                     <span class="tag artist"><i class="fas fa-pencil-alt"></i> Artist</span>
-                    <span class="tag reader"><i class="fas fa-book"></i> Reader</span>
-                    <span class="tag coffee"><i class="fas fa-coffee"></i> Coffee Lover</span>
 
                 </div>
             </div>
         </section>
 
-        <!-- Media Gallery -->
-        <section class="media-gallery glass" data-aos="fade-up" data-aos-delay="400">
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="assets/images/gif1.gif" alt="Anime GIF 1">
+        <!-- Personal Introduction -->
+        <section class="personal-intro">
+            <div class="gallery">
+                <img src="assets/images/gif1.gif" class="gallery-item" data-id="1" alt="About Me">
+                <img src="assets/images/gif2.gif" class="gallery-item" data-id="2" alt="Likes & Dislikes">
+                <img src="assets/images/gif3.gif" class="gallery-item" data-id="3" alt="Interests">
+                <img src="assets/images/gif4.gif" class="gallery-item" data-id="4" alt="Social Media">
+            </div>
+
+            <!-- Info Modals -->
+            <div class="modal-container" id="modal-1">
+                <div class="modal-content">
+                    <button class="nav-btn prev" onclick="navigateModal(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="navigateModal(1)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/images/gif1.gif" alt="About Me" class="modal-image">
+                    <h2>✧ About Me ✧</h2>
+                    <p>✦ Hoàng Hạ Chi 🍪 (yxchi)</p>
+                    <p>✦ February 7 2010, she/her</p>
+                    <p>✦ Hai Duong, VietNam</p>
+                    <p>✦ MC, Artists, Coder, Player</p>
                 </div>
-                <div class="gallery-item">
-                    <img src="assets/images/gif2.gif" alt="Anime GIF 2">
+            </div>
+
+            <div class="modal-container" id="modal-2">
+                <div class="modal-content">
+                    <button class="nav-btn prev" onclick="navigateModal(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="navigateModal(1)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/images/gif2.gif" alt="Likes & Dislikes" class="modal-image">
+                    <h2>✧ Likes & Dislikes ✧</h2>
+                    <p><strong>♥ Likes:</strong></p>
+                    <p>✦ kpop, pet, anime, milk tea</p>
+                    <p>✦ music, sleep, library...</p>
+                    <p><strong>✗ Dislikes:</strong></p>
+                    <p>✦ antis, soft stans, toxic</p>
+                    <p>✦ loud noises, crowed places...</p>
                 </div>
-                <div class="gallery-item">
-                    <img src="assets/images/gif3.gif" alt="Anime GIF 3">
+            </div>
+
+            <div class="modal-container" id="modal-3">
+                <div class="modal-content">
+                    <button class="nav-btn prev" onclick="navigateModal(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="navigateModal(1)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/images/gif3.gif" alt="Interests" class="modal-image">
+                    <h2>✧ Interests ✧</h2>
+                    <p><strong>🎮 Games:</strong></p>
+                    <p>✦ Valorant</p>
+                    <p>✦ Genshin impact</p>
+                    <p>✦ Sky: Children of the Light</p>
+                    <p><strong>📚 Manga:</strong></p>
+                    <p>✦ I love Amy, Adabana, …</p>
+                </div>
+            </div>
+
+            <div class="modal-container" id="modal-4">
+                <div class="modal-content">
+                    <button class="nav-btn prev" onclick="navigateModal(-1)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="nav-btn next" onclick="navigateModal(1)"><i class="fas fa-chevron-right"></i></button>
+                    <img src="assets/images/gif4.gif" alt="Social Media" class="modal-image">
+                    <h2>✧ Social Media ✧</h2>
+                    <div class="social-icons-container">
+                        <a href="https://www.instagram.com/yxchi.sya/" class="social-icon instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="locket.cam/tm07" class="social-icon locket" title="Locket"><i class="fas fa-heart"></i></a>
+                        <a href="https://github.com/SalyyS1/Lyhz" class="social-icon github" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://discord.com/channels/@me/1059885570840596500" class="social-icon discord" title="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Social Network Icons -->
-    <div class="social-icons-row">
-        <a href="#" class="social-icon instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="social-icon facebook" title="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="#" class="social-icon github" title="GitHub"><i class="fab fa-github"></i></a>
-        <a href="#" class="social-icon discord" title="Discord"><i class="fab fa-discord"></i></a>
-    </div>
-    <div class="music-divider"></div>
     <!-- Custom Audio Player -->
     <div class="custom-audio-player">
         <img id="audio-cover" src="assets/images/song1.gif" alt="hopthuthoaiso1" class="audio-cover">
