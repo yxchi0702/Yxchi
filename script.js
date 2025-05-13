@@ -1,9 +1,9 @@
-// Initialize AOS
+
 AOS.init({
     duration: 1000,
     once: true
 });
-
+//iuemvcl
 // Custom cursor
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
