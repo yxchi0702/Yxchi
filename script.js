@@ -28,7 +28,7 @@ document.addEventListener('mouseup', () => {
 });
 
 // Typing animation
-const text = "Lyzh (yxchi.sya)";
+const text = "Hoàng Hạ Chi 🍪";
 const typingText = document.querySelector('.typing-text');
 let i = 0;
 
